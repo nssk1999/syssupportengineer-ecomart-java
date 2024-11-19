@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import uk.tw.energy.domain.ElectricityReading;
+import uk.tw.energy.domain.JoeResponse;
 import uk.tw.energy.domain.MeterReadings;
 import uk.tw.energy.service.MeterReadingService;
 
@@ -42,10 +43,10 @@ public class MeterReadingController {
     }
 
     @GetMapping("/read/{smartMeterId}")
-    public ResponseEntity readReadings(@PathVariable String smartMeterId) {
+    public ResponseEntity<JoeResponse> readReadings(@PathVariable String smartMeterId) {
         Optional<List<ElectricityReading>> readings = meterReadingService.getReadings(smartMeterId);
         return readings.isPresent()
-                ? ResponseEntity.ok(readings.get())
-                : ResponseEntity.notFound().build();
+                ? ResponseEntity.ok(new JoeResponse(HttpStatus.OK,"Successfull", readings.get(),null))
+                : ResponseEntity.status(HttpStatus.NOT_FOUND).body(new JoeResponse(HttpStatus.NOT_FOUND,"Failure", null, "No readings found for meter ID: " + smartMeterId));
     }
 }

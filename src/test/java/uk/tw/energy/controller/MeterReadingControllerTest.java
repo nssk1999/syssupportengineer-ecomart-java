@@ -79,10 +79,13 @@ public class MeterReadingControllerTest {
         meterReadingController.storeReadings(otherMeterReadings);
 
         assertThat(meterReadingService.getReadings(SMART_METER_ID).get()).isEqualTo(meterReadings.electricityReadings());
+        assertThat(meterReadingController.readReadings(SMART_METER_ID).getStatusCode()).isEqualTo(HttpStatus.OK);
+        assertThat(meterReadingController.readReadings(SMART_METER_ID).getBody().data()).isEqualTo(meterReadings.electricityReadings());
     }
 
     @Test
     public void givenMeterIdThatIsNotRecognisedShouldReturnNotFound() {
         assertThat(meterReadingController.readReadings(SMART_METER_ID).getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
     }
+    
 }
