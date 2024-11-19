@@ -48,7 +48,9 @@ public class PricePlanService {
                 .map(ElectricityReading::reading)
                 .reduce(BigDecimal.ZERO, (reading, accumulator) -> reading.add(accumulator));
 
-        return summedReadings.divide(BigDecimal.valueOf(electricityReadings.size()), RoundingMode.HALF_UP).multiply(BigDecimal.valueOf(2)) ;
+        return summedReadings.divide(BigDecimal.valueOf(electricityReadings.size()), RoundingMode.HALF_UP)
+//        		.multiply(BigDecimal.valueOf(2)) 
+        		;
     }
 
     private BigDecimal calculateTimeElapsed(List<ElectricityReading> electricityReadings) {

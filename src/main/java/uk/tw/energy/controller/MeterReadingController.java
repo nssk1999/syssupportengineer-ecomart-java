@@ -37,7 +37,7 @@ public class MeterReadingController {
     private boolean isMeterReadingsValid(MeterReadings meterReadings) {
         String smartMeterId = meterReadings.smartMeterId();
         List<ElectricityReading> electricityReadings = meterReadings.electricityReadings();
-        return smartMeterId == null && !smartMeterId.isEmpty()
+        return smartMeterId != null && !smartMeterId.isEmpty()
                 && electricityReadings != null && !electricityReadings.isEmpty();
     }
 

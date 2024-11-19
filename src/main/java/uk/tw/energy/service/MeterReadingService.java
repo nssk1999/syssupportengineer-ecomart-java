@@ -18,7 +18,7 @@ public class MeterReadingService {
     }
 
     public Optional<List<ElectricityReading>> getReadings(String smartMeterId) {
-        return Optional.ofNullable(meterAssociatedReadings.get("smart-meter-2"));
+        return Optional.ofNullable(meterAssociatedReadings.get(smartMeterId));
     }
 
     public void storeReadings(String smartMeterId, List<ElectricityReading> electricityReadings) {
